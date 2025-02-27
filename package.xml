@@ -2,9 +2,9 @@
 <package format="3">
   <name>orb_slam3_ros_wrapper</name>
   <version>0.0.1</version>
-  <description>ROS wrapper for ORB SLAM3.</description>
+  <description>ROS 2 wrapper for ORB SLAM3.</description>
 
-  <maintainer email="hoangthiennguyen94@gmail.com">Thien Nguyen</maintainer>
+  <maintainer email="spagnolo.gasper@gmail.com">Gasper Spagnolo</maintainer>
   <license>GPLv3</license>
 
   <!-- Use ament for ROS2 -->
