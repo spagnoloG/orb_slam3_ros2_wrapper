@@ -132,6 +132,12 @@ install(PROGRAMS
   RENAME trajectory_server
 )
 
+install(PROGRAMS
+  scripts/image_playback_node.py
+  DESTINATION lib/${PROJECT_NAME}
+  RENAME image_playback_node
+)
+
 install(DIRECTORY launch config
   DESTINATION share/${PROJECT_NAME}
 )

@@ -25,13 +25,13 @@ def generate_launch_description():
                 'enable_pangolin': True
             }]
         ),
-        #Node(
-        #    package='rviz2',
-        #    executable='rviz2',
-        #    name='rviz',
-        #    output='screen',
-        #    arguments=['-d', os.path.join(pkg_share, 'config', 'orb_slam3_no_imu.rviz')]
-        #),
+        Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz',
+            output='screen',
+            arguments=['-d', os.path.join(pkg_share, 'config', 'orb_slam3_no_imu.rviz')]
+        ),
         Node(
             package='orb_slam3_ros_wrapper',
             executable='trajectory_server',
@@ -39,20 +39,3 @@ def generate_launch_description():
             output='screen'
         )
     ])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

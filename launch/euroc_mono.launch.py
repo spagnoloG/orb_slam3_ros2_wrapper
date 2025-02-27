@@ -25,13 +25,13 @@ def generate_launch_description():
                 'world_yaw': 1.57079632679
             }]
         ),
-        #Node(
-        #    package='rviz2',
-        #    executable='rviz2',
-        #    name='rviz',
-        #    output='screen',
-        #    arguments=['-d', os.path.join(pkg_share, 'config', 'orb_slam3_no_imu.rviz')]
-        #),
+        Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz',
+            output='screen',
+            arguments=['-d', os.path.join(pkg_share, 'config', 'orb_slam3_no_imu.rviz')]
+        ),
         Node(
             package='orb_slam3_ros_wrapper',
             executable='trajectory_server',

@@ -26,13 +26,13 @@ def generate_launch_description():
                 'enable_pangolin': True
             }]
         ),
-        #Node(
-        #    package='rviz2',
-        #    executable='rviz2',
-        #    name='rviz',
-        #    output='screen',
-        #    arguments=['-d', os.path.join(pkg_share, 'config', 'orb_slam3_with_imu.rviz')]
-        #),
+        Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz',
+            output='screen',
+            arguments=['-d', os.path.join(pkg_share, 'config', 'orb_slam3_with_imu.rviz')]
+        ),
         Node(
             package='hector_trajectory_server',
             executable='hector_trajectory_server',
