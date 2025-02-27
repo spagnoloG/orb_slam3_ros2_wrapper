@@ -1,12 +1,36 @@
+# orb_slam3_ros2_wrapper
 
-# orb_slam3_ros2_wrapper 
+A ROS2 wrapper for ORB_SLAM3 that simplifies integration with ROS2-based systems. This repository is inspired by the [ORB SLAM3 ROS 1 Wrapper](https://github.com/thien94/orb_slam3_ros_wrapper) and extends its functionality for ROS2.
+
+---
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+  - [Required System Dependencies](#required-system-dependencies)
+  - [Pangolin](#pangolin)
+  - [OpenCV](#opencv)
+  - [ORB-SLAM3](#orb-slam-3)
+  - [Wrapper](#wrapper)
+- [Usage](#usage)
+  - [Running the Wrapper on EuroCC](#running-the-wrapper-on-eurocc)
+- [Contributing](#contributing)
+- [Acknowledgements](#acknowledgements)
+
+---
+
+## Overview
+
+This project provides a ROS2 wrapper for ORB_SLAM3, allowing you to easily integrate the powerful SLAM capabilities into your ROS2 applications. The wrapper handles the interface between the SLAM engine and ROS2, ensuring seamless data flow and processing.
 
 ---
 
 ## Installation
 
+### Required System Dependencies
 
-### Required system dependencies
+Make sure you have the necessary system packages:
 
 ```bash
 sudo apt-get install -y \
@@ -16,6 +40,8 @@ sudo apt-get install -y \
 ```
 
 ### Pangolin
+
+Clone and build Pangolin:
 
 ```bash
 echo "Cloning and building Pangolin..."
@@ -34,6 +60,8 @@ sudo make install
 ```
 
 ### OpenCV
+
+Check if OpenCV is installed (version >= 3.0) and build from source if not:
 
 ```bash
 echo "Checking OpenCV version..."
@@ -59,7 +87,9 @@ else
 fi
 ```
 
-### ORBSLAM 3 
+### ORB-SLAM3
+
+Clone and build ORB-SLAM3:
 
 ```bash
 echo "Cloning ORB-SLAM3 into ~/Documents..."
@@ -76,8 +106,9 @@ echo "Building ORB-SLAM3..."
 ./build.sh
 ```
 
-###  Wrapper
+### Wrapper
 
+Clone the wrapper repository and build the workspace:
 
 ```bash
 mkdir -p ~/colcon_ws/src
@@ -89,18 +120,35 @@ colcon build
 
 ---
 
-## Running the wrapper on EuroCC
+## Usage
 
-To run the ORBSLAM Node:
+### Running the Wrapper on EuroCC
+
+To launch the ORB_SLAM3 node:
+
 ```bash
 cd ~/colcon_ws
 source install/setup.bash
 ros2 launch orb_slam3_ros_wrapper euroc_mono.launch.py
 ```
 
-To send images to ORBSLAM Node:
+To send images to the ORB_SLAM3 node:
+
 ```bash
-ros2 run orb_slam3_ros_wrapper image_playback_node --ros-args -p image_dir:=<path_to_eurocc_data_dir? -p publish_rate:=10.0
+ros2 run orb_slam3_ros_wrapper image_playback_node --ros-args -p image_dir:=<path_to_eurocc_data_dir> -p publish_rate:=10.0
 ```
 
-This project is heavily inspired by wrapper for[ORB SLAM3 ROS 1](https://github.com/thien94/orb_slam3_ros_wrapper).
+---
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request. For major changes, open an issue first to discuss your ideas.
+
+---
+
+## Acknowledgements
+
+- [ORB SLAM3 ROS 1 Wrapper](https://github.com/thien94/orb_slam3_ros_wrapper) for inspiration.
+- [Pangolin](https://github.com/stevenlovegrove/Pangolin)
+- [OpenCV](https://github.com/opencv/opencv)
+- [ORB_SLAM3](https://github.com/thien94/ORB_SLAM3)
