@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>orb_slam3_ros_wrapper</name>
+  <version>0.0.1</version>
+  <description>ROS wrapper for ORB SLAM3.</description>
+
+  <maintainer email="hoangthiennguyen94@gmail.com">Thien Nguyen</maintainer>
+  <license>GPLv3</license>
+
+  <!-- Use ament for ROS2 -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- Replace ROS1 dependencies with ROS2 equivalents -->
+  <depend>rclcpp</depend>
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <depend>cv_bridge</depend>
+  <depend>image_transport</depend>
+  <depend>tf2_ros</depend>
+  <depend>sensor_msgs</depend>
+
+  <!-- If you use message generation, update accordingly -->
+  <!-- <build_depend>rosidl_default_generators</build_depend> -->
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
+

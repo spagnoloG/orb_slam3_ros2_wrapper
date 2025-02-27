@@ -1,0 +1,179 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /TF1/Frames1
+      Splitter Ratio: 0.4000000059604645
+    Tree Height: 604
+  - Class: rviz_common/Selection
+    Name: Selection
+  # Removed Tool Properties panel because its plugin name is not available in ROS2
+  - Class: rviz_common/Views
+    Name: Views
+    Expanded:
+      - /Current View1
+    Splitter Ratio: 0.5
+  - Class: rviz_common/Time
+    Name: Time
+    SyncMode: 0
+    SyncSource: PointCloud2
+
+Preferences:
+  PromptSaveOnExit: true
+
+Toolbars:
+  toolButtonStyle: 2
+
+Visualization Manager:
+  Global Options:
+    Fixed Frame: world
+    Background Color: 46; 52; 54
+    Frame Rate: 30
+    Default Light: true
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Alpha: 0.5
+      Cell Size: 1
+      Color: 160; 160; 164
+      Line Style:
+        Value: Lines
+        Line Width: 0.03
+      Plane: XY
+      Plane Cell Count: 20
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Reference Frame: <Fixed Frame>
+    - Class: rviz_default_plugins/Image
+      Name: Image_raw
+      Enabled: true
+      Image Topic: /cam0/image_raw
+      Queue Size: 2
+      Normalize Range: true
+      Min Value: 0
+      Max Value: 1
+      Median window: 5
+      Transport Hint: raw
+      Unreliable: false
+    - Class: rviz_default_plugins/Path
+      Name: Path
+      Enabled: true
+      Alpha: 1
+      Buffer Length: 1
+      Color: 25; 255; 0
+      Line Style: Billboards
+      Line Width: 0.03
+      Head Diameter: 0.3
+      Head Length: 0.2
+      Length: 0.3
+      Queue Size: 10
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.03
+      Shaft Diameter: 0.1
+      Shaft Length: 0.1
+      Topic: /orb_slam3_ros/trajectory
+      Unreliable: false
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Enabled: true
+      Frame Timeout: 15
+      Marker Alpha: 1
+      Marker Scale: 1
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Update Interval: 0
+      Frames:
+        All Enabled: false
+        camera:
+          Value: true
+        world:
+          Value: true
+      Tree:
+        world:
+          camera: {}
+    - Class: rviz_default_plugins/PointCloud2
+      Name: PointCloud2
+      Enabled: true
+      Alpha: 1
+      Axis: Z
+      Channel Name: intensity
+      Color: 255; 255; 255
+      Color Transformer: Intensity
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Min Value: -10
+        Max Value: 10
+        Value: true
+      Decay Time: 0
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Min Color: 0; 0; 0
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.03
+      Style: Points
+      Topic: /orb_slam3/map_points
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
+  Tools:
+    - Class: rviz_default_plugins/Interact
+      Hide Inactive Objects: true
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+    - Class: rviz_default_plugins/SetInitialPose
+      Theta std deviation: 0.2617993950843811
+      X std deviation: 0.5
+      Y std deviation: 0.5
+      Topic: /initialpose
+    - Class: rviz_default_plugins/SetGoal
+      Topic: /move_base_simple/goal
+    - Class: rviz_default_plugins/PublishPoint
+      Single click: true
+      Topic: /clicked_point
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 3.72673
+      Field of View: 0.785398
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.06
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Focal Point:
+        X: 0.268166
+        Y: -0.252448
+        Z: 0.505412
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05
+      Invert Z Axis: false
+      Near Clip Distance: 0.01
+      Pitch: 0.614796
+      Yaw: 4.71998
+      Target Frame: <Fixed Frame>
+    Saved: ~
+  Name: root
+
+Window Geometry:
+  X: 72
+  Y: 27
+  Width: 1848
+  Height: 1016
+
