@@ -1,20 +1,18 @@
 #include "common.h"
-#include "rclcpp/rclcpp.hpp"
-#include "image_transport/image_transport.hpp"
 #include "cv_bridge/cv_bridge.h"
-#include "sensor_msgs/msg/imu.hpp"
+#include "image_transport/image_transport.hpp"
+#include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/image.hpp"
-#include <thread>
+#include "sensor_msgs/msg/imu.hpp"
 #include <chrono>
+#include <thread>
 
 using std::placeholders::_1;
 
-class ImuGrabber
-{
+class ImuGrabber {
 public:
   ImuGrabber() {}
-  void GrabImu(const sensor_msgs::msg::Imu::ConstSharedPtr &imu_msg)
-  {
+  void GrabImu(const sensor_msgs::msg::Imu::ConstSharedPtr &imu_msg) {
     std::lock_guard<std::mutex> lock(mBufMutex);
     imuBuf.push(imu_msg);
   }
@@ -22,47 +20,42 @@ public:
   std::mutex mBufMutex;
 };
 
-class ImageGrabber
-{
+class ImageGrabber {
 public:
-  ImageGrabber(ORB_SLAM3::System* pSLAM, ImuGrabber *pImuGb) : mpSLAM(pSLAM), mpImuGb(pImuGb) {}
+  ImageGrabber(ORB_SLAM3::System *pSLAM, ImuGrabber *pImuGb)
+      : mpSLAM(pSLAM), mpImuGb(pImuGb) {}
 
-  void GrabImage(const sensor_msgs::msg::Image::ConstSharedPtr &msg)
-  {
+  void GrabImage(const sensor_msgs::msg::Image::ConstSharedPtr &msg) {
     std::lock_guard<std::mutex> lock(mBufMutex);
     if (!img0Buf.empty())
       img0Buf.pop();
     img0Buf.push(msg);
   }
 
-  cv::Mat GetImage(const sensor_msgs::msg::Image::ConstSharedPtr &img_msg)
-  {
+  cv::Mat GetImage(const sensor_msgs::msg::Image::ConstSharedPtr &img_msg) {
     cv_bridge::CvImageConstPtr cv_ptr;
-    try
-    {
+    try {
       cv_ptr = cv_bridge::toCvShare(img_msg, "mono8");
-    }
-    catch (cv_bridge::Exception &e)
-    {
-      RCLCPP_ERROR(rclcpp::get_logger("Mono_Inertial"), "cv_bridge exception: %s", e.what());
+    } catch (cv_bridge::Exception &e) {
+      RCLCPP_ERROR(rclcpp::get_logger("Mono_Inertial"),
+                   "cv_bridge exception: %s", e.what());
     }
     return cv_ptr->image.clone();
   }
 
-  void SyncWithImu()
-  {
-    while (rclcpp::ok())
-    {
-      if (!img0Buf.empty() && !mpImuGb->imuBuf.empty())
-      {
+  void SyncWithImu() {
+    while (rclcpp::ok()) {
+      if (!img0Buf.empty() && !mpImuGb->imuBuf.empty()) {
         cv::Mat im;
-        double tIm = img0Buf.front()->header.stamp.sec + img0Buf.front()->header.stamp.nanosec * 1e-9;
+        double tIm = img0Buf.front()->header.stamp.sec +
+                     img0Buf.front()->header.stamp.nanosec * 1e-9;
         {
           std::lock_guard<std::mutex> lock(mBufMutex);
           im = GetImage(img0Buf.front());
         }
         rclcpp::Time msg_time(img0Buf.front()->header.stamp.sec,
-                              img0Buf.front()->header.stamp.nanosec, RCL_ROS_TIME);
+                              img0Buf.front()->header.stamp.nanosec,
+                              RCL_ROS_TIME);
         {
           std::lock_guard<std::mutex> lock(mBufMutex);
           img0Buf.pop();
@@ -72,9 +65,11 @@ public:
         {
           std::lock_guard<std::mutex> lock(mpImuGb->mBufMutex);
           while (!mpImuGb->imuBuf.empty() &&
-                 (mpImuGb->imuBuf.front()->header.stamp.sec + mpImuGb->imuBuf.front()->header.stamp.nanosec * 1e-9) <= tIm)
-          {
-            double t = mpImuGb->imuBuf.front()->header.stamp.sec + mpImuGb->imuBuf.front()->header.stamp.nanosec * 1e-9;
+                 (mpImuGb->imuBuf.front()->header.stamp.sec +
+                  mpImuGb->imuBuf.front()->header.stamp.nanosec * 1e-9) <=
+                     tIm) {
+            double t = mpImuGb->imuBuf.front()->header.stamp.sec +
+                       mpImuGb->imuBuf.front()->header.stamp.nanosec * 1e-9;
             cv::Point3f acc(mpImuGb->imuBuf.front()->linear_acceleration.x,
                             mpImuGb->imuBuf.front()->linear_acceleration.y,
                             mpImuGb->imuBuf.front()->linear_acceleration.z);
@@ -98,12 +93,11 @@ public:
 
   std::queue<sensor_msgs::msg::Image::ConstSharedPtr> img0Buf;
   std::mutex mBufMutex;
-  ORB_SLAM3::System* mpSLAM;
+  ORB_SLAM3::System *mpSLAM;
   ImuGrabber *mpImuGb;
 };
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
   rclcpp::init(argc, argv);
   auto node = rclcpp::Node::make_shared("Mono_Inertial");
 
@@ -115,9 +109,10 @@ int main(int argc, char **argv)
 
   std::string voc_file = node->get_parameter("voc_file").as_string();
   std::string settings_file = node->get_parameter("settings_file").as_string();
-  if (voc_file == "file_not_set" || settings_file == "file_not_set")
-  {
-    RCLCPP_ERROR(node->get_logger(), "Please provide voc_file and settings_file in the launch file");
+  if (voc_file == "file_not_set" || settings_file == "file_not_set") {
+    RCLCPP_ERROR(
+        node->get_logger(),
+        "Please provide voc_file and settings_file in the launch file");
     rclcpp::shutdown();
     return 1;
   }
