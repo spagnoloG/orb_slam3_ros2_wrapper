@@ -119,6 +119,13 @@ git clone https://github.com/spagnoloG/orb_slam3_ros2_wrapper.git
 colcon build
 ```
 
+If you happen to have memory issues, then build sequentially:
+
+```bash
+export MAKEFLAGS="-j2"
+colcon build --executor sequential
+```
+
 ---
 
 ## Exposed Topics
@@ -205,4 +212,3 @@ This project is licensed under the GNU General Public License v3 (GPLv3). See th
 - [Pangolin](https://github.com/stevenlovegrove/Pangolin)
 - [OpenCV](https://github.com/opencv/opencv)
 - [ORB_SLAM3](https://github.com/thien94/ORB_SLAM3)
-```
