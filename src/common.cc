@@ -40,10 +40,12 @@ void publish_ros_camera_pose(Sophus::SE3f Twc_SE3f, rclcpp::Time msg_time) {
   geometry_msgs::msg::PoseStamped pose_msg;
   pose_msg.header.frame_id = world_frame_id;
   pose_msg.header.stamp = msg_time;
+	
+  // Convert to NED
+  pose_msg.pose.position.x = Twc_SE3f.translation().y();
+  pose_msg.pose.position.y = Twc_SE3f.translation().x();
+  pose_msg.pose.position.z = -Twc_SE3f.translation().z();
 
-  pose_msg.pose.position.x = Twc_SE3f.translation().x();
-  pose_msg.pose.position.y = Twc_SE3f.translation().y();
-  pose_msg.pose.position.z = Twc_SE3f.translation().z();
 
   auto quat = Twc_SE3f.unit_quaternion();
   pose_msg.pose.orientation.w = quat.w();
@@ -142,3 +144,4 @@ tracked_mappoints_to_pointcloud(std::vector<ORB_SLAM3::MapPoint *> map_points,
   }
   return cloud;
 }
+

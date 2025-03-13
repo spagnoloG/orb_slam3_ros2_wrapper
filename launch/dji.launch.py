@@ -25,9 +25,11 @@ def generate_launch_description():
                         "world_frame_id": "world",
                         "cam_frame_id": "camera",
                         "enable_pangolin": True,
-                        "world_roll": 1.57079632679,
+                        "world_roll": 0.0,
                         "world_pitch": 0.0,
-                        "world_yaw": 1.57079632679,
+                        "world_yaw": 0.0,
+                        "video_file": "/home/gasper/Datasets/UAV-LOC-DATASET/FRI-110m-sunny.mp4",
+                        "stride": 6
                     }
                 ],
             ),

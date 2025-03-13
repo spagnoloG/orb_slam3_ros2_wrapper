@@ -186,11 +186,7 @@ ros2 launch orb_slam3_ros_wrapper euroc_mono.launch.py
   - `orb_slam3/map_points` for the tracked map points.
   - TF transforms are broadcast to maintain the spatial relationship between different frames.
 
-To simulate data input (for example, using Euroc data), use the provided image playback node:
-
-```bash
-ros2 run orb_slam3_ros_wrapper image_playback_node --ros-args -p image_dir:=<path_to_eurocc_data_dir> -p publish_rate:=10.0
-```
+Data simulation is specified in launch file.
 
 ---
 
