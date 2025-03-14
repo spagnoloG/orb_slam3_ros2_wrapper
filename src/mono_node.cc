@@ -24,6 +24,7 @@ public:
 	    publish_ros_camera_pose(Twc, msg_time);
 	    publish_ros_tf_transform(Twc, world_frame_id, cam_frame_id, msg_time);
 	    publish_ros_tracked_mappoints(mpSLAM->GetTrackedMapPoints(), msg_time);
+		publish_image(image, msg_time);
 	}
 
     ORB_SLAM3::System *mpSLAM;

@@ -8,6 +8,7 @@ Sophus::SE3f Tc0w = Sophus::SE3f();
 // Global ROS2 publishers (set up in setup_ros_publishers)
 rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr pose_pub;
 rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr map_points_pub;
+image_transport::Publisher image_pub;
 
 // Global transform broadcaster pointer (created with the node)
 std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster;
@@ -21,6 +22,7 @@ void setup_ros_publishers(const rclcpp::Node::SharedPtr &node,
       "orb_slam3/map_points", 1);
 
   tf_broadcaster = std::make_shared<tf2_ros::TransformBroadcaster>(node);
+  image_pub = it.advertise("image_stream", 10);
 
   if (!rpy_rad.isZero(0)) {
     Eigen::AngleAxisf AngleR(rpy_rad(0), Eigen::Vector3f::UnitX());
@@ -143,5 +145,37 @@ tracked_mappoints_to_pointcloud(std::vector<ORB_SLAM3::MapPoint *> map_points,
     }
   }
   return cloud;
+}
+
+void publish_image(const cv::Mat &image, rclcpp::Time msg_time) {
+  if (image.empty()) {
+    RCLCPP_WARN(rclcpp::get_logger("image_publisher"), "Received an empty image, skipping publication.");
+    return;
+  }
+  
+  try {
+    std_msgs::msg::Header header;
+    header.stamp = msg_time;
+    header.frame_id = "map";
+
+    // Verify encoding type
+    std::string encoding_type = (image.channels() == 3) ? "bgr8" : "mono8";
+    
+    sensor_msgs::msg::Image::SharedPtr img_msg = cv_bridge::CvImage(header, encoding_type, image).toImageMsg();
+    
+    size_t expected_size = img_msg->step * img_msg->height;
+    if (img_msg->data.size() != expected_size) {
+      RCLCPP_ERROR(rclcpp::get_logger("image_publisher"),
+                   "Mismatch: Expected size %lu, actual size %lu",
+                   expected_size, img_msg->data.size());
+      return;
+    }
+
+    image_pub.publish(*img_msg);
+
+  } catch (const std::exception &e) {
+    RCLCPP_ERROR(rclcpp::get_logger("image_publisher"),
+                 "Image publishing failed: %s", e.what());
+  }
 }
 

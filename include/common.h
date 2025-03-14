@@ -55,6 +55,7 @@ void setup_ros_publishers(
 void publish_ros_camera_pose(Sophus::SE3f, rclcpp::Time);
 void publish_ros_tracked_mappoints(std::vector<ORB_SLAM3::MapPoint*>, rclcpp::Time);
 void publish_ros_tf_transform(Sophus::SE3f, const std::string &, const std::string &, rclcpp::Time);
+void publish_image(const cv::Mat &image, rclcpp::Time msg_time);
 
 // Helper to convert a Sophus::SE3f into a TransformStamped for tf2.
 geometry_msgs::msg::TransformStamped SE3f_to_transform_stamped(Sophus::SE3f, const std::string &frame_id, const std::string &child_frame_id, rclcpp::Time stamp);

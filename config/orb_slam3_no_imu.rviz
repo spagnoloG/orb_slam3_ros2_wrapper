@@ -1,37 +1,25 @@
 Panels:
   - Class: rviz_common/Displays
+    Help Height: 70
     Name: Displays
     Property Tree Widget:
-      Expanded:
-        - /Global Options
-        - /TF/Frames
-      Splitter Ratio: 0.4
-    Tree Height: 604
+      Expanded: ~
+      Splitter Ratio: 0.4000000059604645
+    Tree Height: 257
   - Class: rviz_common/Selection
     Name: Selection
-  # Removed Tool Properties panel since no standalone plugin exists in ROS2.
   - Class: rviz_common/Views
-    Name: Views
     Expanded:
-      - /Current View
+      - /Current View1
+    Name: Views
     Splitter Ratio: 0.5
   - Class: rviz_common/Time
+    Experimental: false
     Name: Time
     SyncMode: 0
     SyncSource: PointCloud2
-
-Preferences:
-  PromptSaveOnExit: true
-
-Toolbars:
-  toolButtonStyle: 2
-
 Visualization Manager:
-  Global Options:
-    Fixed Frame: world
-    Background Color: 46; 52; 54
-    Frame Rate: 30
-    Default Light: true
+  Class: ""
   Displays:
     - Alpha: 0.5
       Cell Size: 1
@@ -39,8 +27,8 @@ Visualization Manager:
       Color: 160; 160; 164
       Enabled: true
       Line Style:
+        Line Width: 0.029999999329447746
         Value: Lines
-        Line Width: 0.03
       Name: Grid
       Normal Cell Count: 0
       Offset:
@@ -50,59 +38,27 @@ Visualization Manager:
       Plane: XY
       Plane Cell Count: 20
       Reference Frame: <Fixed Frame>
-    - Class: rviz_default_plugins/Image
-      Name: Image_raw
-      Enabled: true
-      Image Topic: /cam0/image_raw
-      Normalize Range: true
-      Min Value: 0
-      Max Value: 1
-      Median window: 5
-      Queue Size: 2
-      Transport Hint: raw
-      Unreliable: false
-    - Alpha: 1
-      Buffer Length: 1
-      Class: rviz_default_plugins/Path
-      Name: Path
-      Enabled: true
-      Color: 25; 255; 0
-      Line Style: Billboards
-      Line Width: 0.03
-      Head Diameter: 0.3
-      Head Length: 0.2
-      Length: 0.3
-      Queue Size: 10
-      Offset:
-        X: 0
-        Y: 0
-        Z: 0
-      Pose Color: 255; 85; 255
-      Pose Style: None
-      Radius: 0.03
-      Shaft Diameter: 0.1
-      Shaft Length: 0.1
-      Topic: /orb_slam3_ros/trajectory
-      Unreliable: false
+      Value: true
     - Class: rviz_default_plugins/TF
-      Name: TF
       Enabled: true
       Frame Timeout: 15
-      Marker Alpha: 1
-      Marker Scale: 1
-      Show Arrows: true
-      Show Axes: true
-      Show Names: true
-      Update Interval: 0
       Frames:
         All Enabled: false
         camera:
           Value: true
         world:
           Value: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
       Tree:
         world:
-          camera: {}
+          camera:
+            {}
+      Update Interval: 0
+      Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -112,24 +68,65 @@ Visualization Manager:
       Axis: Z
       Channel Name: intensity
       Class: rviz_default_plugins/PointCloud2
-      Name: PointCloud2
-      Enabled: true
       Color: 255; 255; 255
       Color Transformer: Intensity
       Decay Time: 0
+      Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
+      Max Intensity: 4096
       Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
       Position Transformer: XYZ
-      Queue Size: 10
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.03
+      Size (m): 0.029999999329447746
       Style: Points
-      Topic: /orb_slam3/map_points
-      Unreliable: false
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /orb_slam3/map_points
       Use Fixed Frame: true
       Use rainbow: true
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz_default_plugins/Path
+      Color: 25; 255; 0
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /reconstructed_path
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 46; 52; 54
+    Fixed Frame: world
+    Frame Rate: 30
+  Name: root
   Tools:
     - Class: rviz_default_plugins/Interact
       Hide Inactive Objects: true
@@ -137,44 +134,72 @@ Visualization Manager:
     - Class: rviz_default_plugins/Select
     - Class: rviz_default_plugins/FocusCamera
     - Class: rviz_default_plugins/Measure
+      Line color: 128; 128; 0
     - Class: rviz_default_plugins/SetInitialPose
-      Theta std deviation: 0.2618
-      X std deviation: 0.5
-      Y std deviation: 0.5
-      Topic: /initialpose
+      Covariance x: 0.25
+      Covariance y: 0.25
+      Covariance yaw: 0.06853891909122467
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /initialpose
     - Class: rviz_default_plugins/SetGoal
-      Topic: /move_base_simple/goal
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /move_base_simple/goal
     - Class: rviz_default_plugins/PublishPoint
       Single click: true
-      Topic: /clicked_point
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /clicked_point
+  Transformation:
+    Current:
+      Class: rviz_default_plugins/TF
+  Value: true
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Name: Current View
-      Distance: 3.87711
-      Field of View: 0.785398
+      Distance: 41.88771438598633
       Enable Stereo Rendering:
-        Stereo Eye Separation: 0.06
+        Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.290721
-        Y: -0.167546
-        Z: 0.394074
+        X: 0.29072099924087524
+        Y: -0.16754600405693054
+        Z: 0.3940739929676056
       Focal Shape Fixed Size: true
-      Focal Shape Size: 0.05
+      Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
-      Near Clip Distance: 0.01
-      Pitch: 0.384797
-      Yaw: 3.125005
+      Name: Current View
+      Near Clip Distance: 0.009999999776482582
+      Pitch: 1.1247957944869995
       Target Frame: <Fixed Frame>
+      Value: Orbit (rviz_default_plugins)
+      Yaw: 0.11183533817529678
     Saved: ~
-  Name: root
-
 Window Geometry:
-  X: 72
-  Y: 27
+  Displays:
+    collapsed: false
+  Height: 1007
+  Hide Left Dock: false
+  Hide Right Dock: false
+  QMainWindow State: 000000ff00000000fd00000001000000000000037600000395fc0200000005fb000000120049006d006100670065005f007200610077010000003d000000b60000000000000000fb000000100044006900730070006c006100790073010000003d00000184000000c900fffffffb0000001200530065006c0065006300740069006f006e01000001c7000000bb0000005c00fffffffb0000000a005600690065007700730100000288000000fc000000a400fffffffb0000000800540069006d0065010000038a000000480000003900ffffff000003bc0000039500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Selection:
+    collapsed: false
+  Time:
+    collapsed: false
+  Views:
+    collapsed: false
   Width: 1848
-  Height: 1016
-
+  X: 32
+  Y: 0

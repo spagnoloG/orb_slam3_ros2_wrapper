@@ -24,12 +24,12 @@ def generate_launch_description():
                         ),
                         "world_frame_id": "world",
                         "cam_frame_id": "camera",
-                        "enable_pangolin": True,
+                        "enable_pangolin": False,
                         "world_roll": 0.0,
                         "world_pitch": 0.0,
                         "world_yaw": 0.0,
-                        "video_file": "/home/gasper/Datasets/UAV-LOC-DATASET/FRI-110m-sunny.mp4",
-                        "stride": 6
+                        "video_file": "/home/gasper/Datasets/UAV-LOC-DATASET/Sempeter-110m-cloudy.mp4",
+                        "stride": 10
                     }
                 ],
             ),
